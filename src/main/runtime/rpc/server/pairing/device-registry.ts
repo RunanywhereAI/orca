@@ -283,7 +283,8 @@ export class DeviceRegistry extends DeviceRegistryStore {
     const seenAt = Date.now()
     this.replaceRow(deviceId, ({ offerExpiresAt: _paired, ...device }) => ({
       ...device,
-      lastSeenAt: seenAt
+      lastSeenAt: seenAt,
+      ...(device.ticket === true && device.lastSeenAt === 0 ? { ticketFirstSeenAt: seenAt } : {})
     }))
   }
 
