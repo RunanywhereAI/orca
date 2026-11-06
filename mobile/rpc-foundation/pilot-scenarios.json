@@ -9638,7 +9638,10 @@
       "id": "diff-review-snapshot",
       "operation": "session.diff-review-load",
       "family": "session.diff-review",
-      "sites": ["mobile/src/session/mobile-diff-review-loaders.ts"],
+      "sites": [
+        "mobile/src/session/mobile-diff-review-loaders.ts",
+        "mobile/src/session/mobile-diff-review-snapshot-loader.ts"
+      ],
       "schedules": [],
       "steps": [
         {
@@ -9676,21 +9679,7 @@
           }
         },
         {
-          "bind": "base-ref-show",
-          "request": "worktree.show#1",
-          "params": {
-            "worktree": "id:repo-9::/w"
-          }
-        },
-        {
-          "bind": "review-show",
-          "request": "worktree.show#2",
-          "params": {
-            "worktree": "id:repo-9::/w"
-          }
-        },
-        {
-          "complete": "base-ref-show",
+          "complete": "worktree.show#1",
           "params": {
             "worktree": "id:repo-9::/w"
           },
@@ -9699,7 +9688,11 @@
             "result": {
               "worktree": {
                 "baseRef": "origin/main",
-                "linkedPR": 12
+                "linkedPR": 12,
+                "diffComments": [],
+                "mobileDiffReview": {
+                  "files": []
+                }
               }
             }
           }
@@ -9718,23 +9711,6 @@
                   "worktreeBaseRef": "origin/main"
                 }
               ]
-            }
-          }
-        },
-        {
-          "complete": "review-show",
-          "params": {
-            "worktree": "id:repo-9::/w"
-          },
-          "reply": {
-            "ok": true,
-            "result": {
-              "worktree": {
-                "diffComments": [],
-                "mobileDiffReview": {
-                  "files": []
-                }
-              }
             }
           }
         },
@@ -9776,7 +9752,10 @@
       "id": "diff-review-status-unavailable",
       "operation": "session.diff-review-load",
       "family": "session.diff-review",
-      "sites": ["mobile/src/session/mobile-diff-review-loaders.ts"],
+      "sites": [
+        "mobile/src/session/mobile-diff-review-loaders.ts",
+        "mobile/src/session/mobile-diff-review-snapshot-loader.ts"
+      ],
       "schedules": [],
       "steps": [
         {
@@ -10212,7 +10191,10 @@
       "id": "diff-review-notes-refused-before-compare",
       "operation": "session.diff-review-load",
       "family": "session.diff-review",
-      "sites": ["mobile/src/session/mobile-diff-review-loaders.ts"],
+      "sites": [
+        "mobile/src/session/mobile-diff-review-loaders.ts",
+        "mobile/src/session/mobile-diff-review-snapshot-loader.ts"
+      ],
       "schedules": [],
       "steps": [
         {
@@ -10247,21 +10229,7 @@
           }
         },
         {
-          "bind": "base-ref-show",
-          "request": "worktree.show#1",
-          "params": {
-            "worktree": "id:repo-9::/w"
-          }
-        },
-        {
-          "bind": "review-show",
-          "request": "worktree.show#2",
-          "params": {
-            "worktree": "id:repo-9::/w"
-          }
-        },
-        {
-          "complete": "review-show",
+          "complete": "worktree.show#1",
           "params": {
             "worktree": "id:repo-9::/w"
           },
@@ -10275,21 +10243,6 @@
         },
         {
           "checkpoint": "notes-refused"
-        },
-        {
-          "complete": "base-ref-show",
-          "params": {
-            "worktree": "id:repo-9::/w"
-          },
-          "reply": {
-            "ok": true,
-            "result": {
-              "worktree": {
-                "baseRef": "origin/main",
-                "linkedPR": 12
-              }
-            }
-          }
         },
         {
           "complete": "repo.list#1",
@@ -21046,6 +20999,9 @@
           "id": "leave"
         },
         {
+          "advance": 3001
+        },
+        {
           "action": "remount",
           "id": "return"
         },
@@ -21141,6 +21097,9 @@
         {
           "action": "leave",
           "id": "leave"
+        },
+        {
+          "advance": 3001
         },
         {
           "action": "remount",
