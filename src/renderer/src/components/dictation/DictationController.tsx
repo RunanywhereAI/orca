@@ -333,7 +333,8 @@ export function DictationController() {
   }, [settings?.voice?.enabled, startDictation, stopDictation])
 
   useDictationSilenceStop(
-    dictationState === 'listening' && settings?.voice?.dictationMode !== 'hold',
+    dictationState === 'listening',
+    settings?.voice?.dictationMode,
     getLastSpeechAt,
     () => void stopDictation()
   )
