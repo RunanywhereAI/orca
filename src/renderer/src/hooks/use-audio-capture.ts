@@ -309,6 +309,8 @@ export function useAudioCapture(publishMeter?: DictationMeterPublisher) {
   }, [resetBufferedAudio])
 
   const getCapturedChunkCount = useCallback(() => capturedChunkCountRef.current, [])
+  // On the performance.now() clock the analyzer is fed with.
+  const getLastSpeechAt = useCallback(() => meterAnalyzerRef.current.lastSpeechAt, [])
 
   const stop = useCallback(
     (options: StopCaptureOptions = {}) => {
@@ -333,6 +335,7 @@ export function useAudioCapture(publishMeter?: DictationMeterPublisher) {
     flushBufferedAudio,
     discardBufferedAudio,
     getCapturedChunkCount,
+    getLastSpeechAt,
     isCapturingRef
   }
 }

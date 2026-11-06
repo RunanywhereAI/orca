@@ -17317,7 +17317,8 @@
           "2d5b9fabf9": "Microphone access denied. Grant access in system settings, then restart Orca.",
           "5d2c3e7ae3": "No speech detected.",
           "micFallback": "Selected microphone unavailable. Using system default.",
-          "micDisconnected": "Microphone disconnected. Dictation stopped."
+          "micDisconnected": "Microphone disconnected. Dictation stopped.",
+          "stoppedAfterSilence": "Stopped after a minute of silence"
         },
         "DictationIndicator": {
           "335e1bc6cb": "Stop dictation",
