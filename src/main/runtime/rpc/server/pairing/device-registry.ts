@@ -272,7 +272,15 @@ export class DeviceRegistry extends DeviceRegistryStore {
       options
     )
     if (fork.created) {
-      this.devices = this.save(fork.nextDevices, { durable: true })
+      // Remembered so the link is never reported as an outdated client once session keys are gone.
+      const next = options.ephemeral
+        ? fork.nextDevices.map((device) =>
+            device.deviceId === legacyDeviceId && device.servesSessionBrowsers !== true
+              ? { ...device, servesSessionBrowsers: true as const }
+              : device
+          )
+        : fork.nextDevices
+      this.devices = this.save(next, { durable: true })
     }
     return fork.entry
   }

@@ -92,6 +92,7 @@ export function normalizeLoadedDeviceRow(device: unknown): DeviceEntry | null {
     ticket: device.ticket === true ? true : undefined,
     exchangeToken: isExchangeDeviceToken(device.exchangeToken) ? device.exchangeToken : undefined,
     ticketFirstSeenAt: isTimestamp(device.ticketFirstSeenAt) ? device.ticketFirstSeenAt : undefined,
+    servesSessionBrowsers: device.servesSessionBrowsers === true ? true : undefined,
     ...validDeviceKeyFields(device)
   }
 }
